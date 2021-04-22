@@ -1,46 +1,38 @@
 # import
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-import csv
-import numpy as np
-from book import createBook
-from bookLink import scrapBookLink
-from categoryLink import scrapCategoryLink
-
+from get_url_category import get_url_category
+from get_book import get_book
+from get_url_book import get_url_book
+from save_csv import save_book_csv
 
 rows = []
-rows.append(["product_page_url", "universal_product_code(upc)", "title", "price_including_tax",
-             "price_excluding_tax", "number_available", "product_description", "categorie", "review_rating", "image_url"])
 
 # specify the url
 url = 'http://books.toscrape.com/index.html'
-categoryLink = scrapCategoryLink(url)
+url_category = get_url_category(url)
 
-
-def allLinkPage(categoryLink):
-    for i in range(len(categoryLink)):
-        for i in range(21):
-            url = categoryLink[i] + '/page-' + \
+def get_all_page(url_category):
+    for i in range(1, int(len(url_category))):
+        for x in range(9):
+            if x == 1:
+                url_book = url_category[i] + 'index.html'
+                url_book = get_url_book(url)
+            else:
+                url = url_category[i] + '/page-' + \
                 str(i) + '.html'
-            bookLink = scrapBookLink(url)
-    return bookLink
+                url_book = get_url_book(url)
+    return url_book
 
 
-bookLink = allLinkPage(categoryLink)
+url_book = get_all_page(url_category)
 
 
-def allBook(bookLink):
-    for i in range(len(bookLink)):
-        r = requests.get(bookLink[i])
-        book = createBook(bookLink[i])
-
+def get_all_book(url_book):
+    for i in range(len(url_book)):
+        book = get_book(url_book[i])
         # write each result to rows
-        rows.append([book])
+        rows.append(book)
 
-allBook(bookLink)
+get_all_book(url_book)
 
 # Create csv and write dict
-with open('extract.csv', 'w+') as csv_file:
-    csv_writer = csv.writer(csv_file)
-    csv_writer.writerow(rows)
+save_book_csv(rows)
