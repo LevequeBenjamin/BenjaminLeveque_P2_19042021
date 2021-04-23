@@ -1,8 +1,10 @@
-# import
+# import function
 from get_data import get_data
 
-# function get_book
+
+# find results
 def get_book(url):
+    # request get
     soup = get_data(url)
     article = soup.find('article', attrs={'class': 'product_page'})
     table = article.find('table', attrs={'class': 'table'})
