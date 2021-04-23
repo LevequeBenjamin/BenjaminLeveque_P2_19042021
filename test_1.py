@@ -7,10 +7,6 @@ from get_data import get_data
 
 rows = []
 url = 'https://books.toscrape.com/catalogue/category/books/travel_2/index.html'
-#'http://books.toscrape.com/catalogue/category/books/travel_2/index.html'
-# specify the url
-# url = 'http://books.toscrape.com/index.html'
-# url_category = get_url_category(url)
 
 
 def get_next_page(soup, url):
