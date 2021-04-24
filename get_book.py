@@ -1,35 +1,39 @@
 # import function
 from get_data import get_data
+import urllib.request
 
 
 # find results
 def get_book(url):
     # request get
     soup = get_data(url)
-    article = soup.find('article', attrs={'class': 'product_page'})
-    table = article.find('table', attrs={'class': 'table'})
-    tds = table.findAll('td')
+    article = soup.find('article', class_= 'product_page')
+    table = article.find('table', class_= 'table')
+    tds = table.find_all('td')
+    # product_page_url
+    product_page_url = url
     # universal_product_code(upc)
-    upc = table.find('td').getText()
+    upc = table.find('td').get_text()
     # title
-    title = article.find('h1').getText()
+    title = article.find('h1').get_text()
     # price_including_tax
-    price_incl_tax = tds[3].getText()
+    price_including_tax = tds[3].get_text()
     # price_excluding_tax
-    price_excl_tax = tds[2].getText()
+    price_excluding_tax = tds[2].get_text()
     # number_available
-    number_available = tds[5].getText().strip('In stock ()')
+    number_available = tds[5].get_text().strip('In stock ()')
     # product_description
-    p = article.findAll('p')
-    product_description = p[3].getText()
+    product_description = article.find_all('p')[3].get_text()
     # categorie
-    li = soup.find('ul', attrs={'class': 'breadcrumb'}).findAll('li')
-    category = li[2].getText().strip('\n')
+    category = soup.find('ul', class_= 'breadcrumb').find_all('li')[2].get_text().strip('\n')
     # review_rating
-    number_reviews = soup.find('p', attrs={'class': 'star-rating'})['class'][1].lower() 
+    reviews_rating = soup.find('p', class_= 'star-rating')['class'][1].lower() 
     # imageUrl
     image_source = article.find(
-        'div', attrs={'class': 'item'}).find('img')['src']
+        'div', class_= 'item').find('img')['src']
     image_url = 'http://books.toscrape.com/' + image_source.strip('../..')
+    # downloads image
+    filename = title.replace(" ", "_").lower()
+    urllib.request.urlretrieve(image_url, 'downloads/images/' + filename + '.jpg')
 
-    return(url, upc, title, price_incl_tax, price_excl_tax, number_available, product_description, category, number_reviews, image_url)
+    return(product_page_url, upc, title, price_including_tax, price_excluding_tax, number_available, product_description, category, reviews_rating, image_url)

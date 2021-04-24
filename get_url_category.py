@@ -7,7 +7,7 @@ category_url = []
 def get_url_category(url):
     # request get
     soup = get_data(url)
-    lis = soup.find('ul', attrs={'class': 'nav-list'}).findAll('li')
+    lis = soup.find('ul', class_= 'nav-list').find_all('li')
     # loop over results
     for li in lis:
         category_link = li.find('a')['href']

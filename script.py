@@ -17,17 +17,16 @@ def get_url(url_index):
 # get all book
 def get_all_scrap(url):
     rows = []
-    for i in range(1, len(url)):
-        del rows[:]
+    # loop from second category url
+    for i in range(1, len(url)):       
         # get next page url
         def get_next_page(soup, url):
             url = url.replace(url.split('/')[-1], '')
-            if soup.find('ul', attrs={'class': 'pager'}):
-                page = soup.find('ul', attrs={'class': 'pager'})
-                if page.find('li', attrs={'class': 'next'}):
+            if soup.find('ul', class_= 'pager'):
+                page = soup.find('ul', class_= 'pager')
+                if page.find('li', class_= 'next'):
                     url = url + \
-                        str(page.find('li', attrs={
-                            'class': 'next'}).find('a')['href'])
+                        str(page.find('li', class_= 'next').find('a')['href'])
                     return url
                 else:
                     return
@@ -41,6 +40,7 @@ def get_all_scrap(url):
         
         # get book 
         def get_all_book(url_book):
+            # loop from book url
             for i in range(len(url_book)):
                 book = get_book(url_book[i])
                 # write each result to rows
@@ -49,6 +49,7 @@ def get_all_scrap(url):
         # get book url
         def srap_books(url):
             url_book = get_all_page(url)
+            # loop to get the next pages
             while True:
                 soup = get_data(url)
                 url = get_next_page(soup, url)
@@ -60,8 +61,10 @@ def get_all_scrap(url):
 
         url_book = srap_books(url[i])
         get_all_book(url_book)
-        # create csv and write dict
+        # create csv and write rows list
         save_book_csv(rows)
+        # cancel list
+        del rows[:]
         del url_book[:]
 
 
