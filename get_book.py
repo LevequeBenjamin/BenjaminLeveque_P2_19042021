@@ -2,6 +2,7 @@
 from get_data import get_data
 # import librairies
 import urllib.request
+from urllib.parse import urljoin
 
 
 # find results
@@ -32,9 +33,10 @@ def get_book(url):
     # imageUrl
     image_source = article.find(
         'div', class_= 'item').find('img')['src']
-    image_url = 'http://books.toscrape.com/' + image_source.strip('../..')
+    image_url = urljoin('http://books.toscrape.com/', image_source)
     # downloads image
-    filename = title.replace(" ", "_").lower()
-    urllib.request.urlretrieve(image_url, 'downloads/images/' + filename + '.jpg')
+    image_file = title.replace(" ", "_").lower()
+    filename = image_file + '.jpg'
+    urllib.request.urlretrieve(image_url, 'downloads/images/' + filename)
 
-    return(product_page_url, upc, title, price_including_tax, price_excluding_tax, number_available, product_description, category, reviews_rating, image_url)
+    return(product_page_url, upc, title, price_including_tax, price_excluding_tax, number_available, product_description, category, reviews_rating, image_url, filename)

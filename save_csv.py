@@ -8,6 +8,6 @@ def save_book_csv(rows):
         csv_writer = csv.writer(csv_file, dialect='excel')
         # create and write headers to a list
         csv_writer.writerow(["product_page_url", "universal_product_code(upc)", "title", "price_including_tax",
-                             "price_excluding_tax", "number_available", "product_description", "categorie", "review_rating", "image_url"])
+                             "price_excluding_tax", "number_available", "product_description", "categorie", "review_rating", "image_url", "filename"])
         # create and write rows list
         csv_writer.writerows(rows)
