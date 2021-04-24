@@ -1,9 +1,10 @@
 # import function
 from get_data import get_data
-book_url = []
+
 
 # find book url
 def get_url_book(url):
+    book_url = []
     # request get
     soup = get_data(url)
     articles = soup.find_all('article', class_= 'product_pod')

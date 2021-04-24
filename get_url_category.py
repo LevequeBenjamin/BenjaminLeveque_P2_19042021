@@ -1,10 +1,10 @@
-# import libraries
+# import function
 from get_data import get_data
-category_url = []
 
 
 # find category url
 def get_url_category(url):
+    category_url = []
     # request get
     soup = get_data(url)
     lis = soup.find('ul', class_= 'nav-list').find_all('li')
