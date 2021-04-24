@@ -26,7 +26,7 @@ def get_book(url):
     li = soup.find('ul', attrs={'class': 'breadcrumb'}).findAll('li')
     category = li[2].getText().strip('\n')
     # review_rating
-    number_reviews = tds[6].getText()
+    number_reviews = soup.find('p', attrs={'class': 'star-rating'})['class'][1].lower() 
     # imageUrl
     image_source = article.find(
         'div', attrs={'class': 'item'}).find('img')['src']
