@@ -17,7 +17,7 @@ def get_book(url):
     # universal_product_code(upc)
     upc = table.find('td').get_text()
     # title
-    title = article.find('h1').get_text()
+    title = article.find('h1').get_text().replace('/', '_')
     # price_including_tax
     price_including_tax = tds[3].get_text()
     # price_excluding_tax

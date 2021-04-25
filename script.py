@@ -49,6 +49,7 @@ def get_all_scrap(url):
         # get book url
         def srap_books(url):
             url_book = get_all_page(url)
+            get_all_book(url_book)
             # loop to get the next pages
             while True:
                 soup = get_data(url)
@@ -57,15 +58,15 @@ def get_all_scrap(url):
                     break
                 else:
                     url_book = get_all_page(url)
-            return url_book
+                    get_all_book(url_book)
+            del url_book[:]
 
-        url_book = srap_books(url[i])
-        get_all_book(url_book)
+        #url_book = 
+        srap_books(url[i])
         # create csv and write rows list
         save_book_csv(rows)
         # cancel list
         del rows[:]
-        del url_book[:]
 
 
 url = get_url(url_index)
