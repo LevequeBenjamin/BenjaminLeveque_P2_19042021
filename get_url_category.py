@@ -3,11 +3,11 @@ from get_data import get_data
 
 
 # find category url
-def get_url_category(url):
+def get_url_category(url: str) -> list:
     category_url = []
     # request get
     soup = get_data(url)
-    lis = soup.find('ul', class_= 'nav-list').find_all('li')
+    lis = soup.find('ul', class_='nav-list').find_all('li')
     # loop over results
     for li in lis:
         category_link = li.find('a')['href']

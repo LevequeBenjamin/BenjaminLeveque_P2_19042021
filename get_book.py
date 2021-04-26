@@ -6,11 +6,11 @@ from urllib.parse import urljoin
 
 
 # find results
-def get_book(url):
+def get_book(url: str) -> tuple:
     # request get
     soup = get_data(url)
-    article = soup.find('article', class_= 'product_page')
-    table = article.find('table', class_= 'table')
+    article = soup.find('article', class_='product_page')
+    table = article.find('table', class_='table')
     tds = table.find_all('td')
     # product_page_url
     product_page_url = url
@@ -27,16 +27,29 @@ def get_book(url):
     # product_description
     product_description = article.find_all('p')[3].get_text()
     # categorie
-    category = soup.find('ul', class_= 'breadcrumb').find_all('li')[2].get_text().strip('\n')
+    category = soup.find('ul', class_='breadcrumb').find_all('li')[
+        2].get_text().strip('\n')
     # review_rating
-    reviews_rating = soup.find('p', class_= 'star-rating')['class'][1].lower() 
+    reviews_rating = soup.find('p', class_='star-rating')['class'][1].lower()
     # imageUrl
     image_source = article.find(
-        'div', class_= 'item').find('img')['src']
+        'div', class_='item').find('img')['src']
     image_url = urljoin('http://books.toscrape.com/', image_source)
     # downloads image
     image_file = title.replace(" ", "_").lower()
     filename = image_file + '.jpg'
     urllib.request.urlretrieve(image_url, 'downloads/images/' + filename)
 
-    return(product_page_url, upc, title, price_including_tax, price_excluding_tax, number_available, product_description, category, reviews_rating, image_url, filename)
+    return(
+        product_page_url,
+        upc,
+        title,
+        price_including_tax,
+        price_excluding_tax,
+        number_available,
+        product_description,
+        category,
+        reviews_rating,
+        image_url,
+        filename
+    )
