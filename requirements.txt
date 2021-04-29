@@ -1,5 +1,5 @@
 beautifulsoup4==4.9.3
 requests==2.25.1
 lxml==4.6.3
-csv23==0.3.2
+csv==0.3.2
 

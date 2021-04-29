@@ -1,12 +1,32 @@
-# import function
-from get_data import get_data
 # import librairies
 import urllib.request
 from urllib.parse import urljoin
 
+# import modules_p2
+from modules_p2.get_data import get_data
+
 
 # find results
 def get_book(url: str) -> tuple:
+    """[From a book url, it finds all the information from the page parsed by Beautifulsoup]
+
+    Args:
+        url (str): [url of a book]
+
+    Returns:
+        tuple: [tuple with 
+        product_page_url,
+        upc,
+        title,
+        price_including_tax,
+        price_excluding_tax,
+        number_available,
+        product_description,
+        category,
+        reviews_rating,
+        image_url,
+        filename]
+    """
     # request get
     soup = get_data(url)
     article = soup.find('article', class_='product_page')

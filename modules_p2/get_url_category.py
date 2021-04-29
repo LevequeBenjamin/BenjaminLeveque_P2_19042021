@@ -1,9 +1,17 @@
-# import function
-from get_data import get_data
+# import modules_p2
+from modules_p2.get_data import get_data
 
 
 # find category url
 def get_url_category(url: str) -> list:
+    """[Find all urls for each category of books]
+
+    Args:
+        url_index (str): [url of the main book.toscrap page]
+
+    Returns:
+        list: [a list with the urls of each category]
+    """
     category_url = []
     # request get
     soup = get_data(url)

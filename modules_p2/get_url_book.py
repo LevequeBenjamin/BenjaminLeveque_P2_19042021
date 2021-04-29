@@ -1,9 +1,17 @@
-# import function
-from get_data import get_data
+# import modules_p2
+from modules_p2.get_data import get_data
 
 
 # find book url
 def get_url_book(url: str) -> list:
+    """[Find all book urls on a page]
+
+    Args:
+        url (str): [url of a book category page]
+
+    Returns:
+        list: [Returns a list with all the urls of the books on a page]
+    """
     book_url = []
     # request get
     soup = get_data(url)
