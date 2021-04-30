@@ -1,5 +1,7 @@
 # import librairies
 from bs4 import BeautifulSoup
+from tqdm.auto import tqdm
+from time import sleep
 
 # import modules_p2
 from modules_p2.get_url_category import get_url_category
@@ -128,10 +130,12 @@ url = get_url(url_index)
 
 if __name__ == '__main__':
     # loop from second category url
-    for i in range(1, len(url)):
+    for i in tqdm(range(1, len(url))):
         rows = []
         srap_books(url[i], rows)
         # create csv and write rows list
         save_csv_book(rows)
+        # progress bar
+        sleep(0.01)
         # cancel list
         del rows[:]
