@@ -132,7 +132,7 @@ if __name__ == '__main__':
     print('========================================================')
     print('##### RUN SCRIPT.PY / P2_DA_PYTHON_OPENCLASSROOMS #####')
     print('========================================================')
-    print('********** LOADING **********')
+    print('LOADING...')
     # loop from second category url
     for i in tqdm(range(1, len(url))):
         rows = []
