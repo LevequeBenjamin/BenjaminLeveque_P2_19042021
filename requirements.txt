@@ -1,6 +1,6 @@
 beautifulsoup4==4.9.3
 requests==2.25.1
+csv23==0.3.2
 lxml==4.6.3
-csv==0.3.2
 tqdm==4.60.0
 

@@ -1,3 +1,6 @@
+#! /usr/bin/env python3
+# coding: utf-8
+
 # import librairies
 from bs4 import BeautifulSoup
 from tqdm.auto import tqdm
@@ -13,6 +16,7 @@ from modules_p2.get_data import get_data
 
 # specify the url
 url_index = 'https://books.toscrape.com/index.html'
+
 
 # get category url
 def get_url(url_index: str) -> list:
@@ -128,7 +132,7 @@ def srap_books(url: str, rows: list):
 url = get_url(url_index)
 
 
-if __name__ == '__main__':
+def main():
     print('========================================================')
     print('##### RUN SCRIPT.PY / P2_DA_PYTHON_OPENCLASSROOMS #####')
     print('========================================================')
@@ -144,3 +148,7 @@ if __name__ == '__main__':
         # cancel list
         del rows[:]
     print('##### END #####')
+
+
+if __name__ == '__main__':
+    main()
